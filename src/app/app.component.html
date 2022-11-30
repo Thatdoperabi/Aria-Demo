@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aria Demo</title>
+  <link rel="stylesheet" href="./app.component.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <header>
+    <a class="logo">Aria Demo</a>
+    <ul>
+      <!--       by just adding the HTML5 nav tag it becomes much clearer what is happening in the header.-->
+      <nav>
+        <li><a href="/help">Help</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/services">Services</a></li>
+      </nav>
+    </ul>
+  </header>
+</div>
+
+<main>
+  <div class="container">
+    <h1>Learn about ARIA</h1>
+    <p class="subtext">What percentage of companies use ARIA? Let's find out!</p>
+  </div>
+
+<!--by adding the ARIA label here we can help visually impaired people know exactly what values are being projected in the graph-->
+  <div role="img" aria-label="Graph showing that use of aria in Q1 is up 10% and that we project a 15% increase by Q3">
+    <div class="wrapper">
+      <img class="img-graph" src="../assets/graph.jpg" alt="graph">
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Who are we helping by using ARIA in our websites?</h2>
+
+    <!--              by adding these tags into our button we give the user more and much clearer information-->
+    <button
+      [attr.aria-expanded]="ariaExpanded"
+      aria-controls="sect1"
+      id="btn1"
+      class="collapsible" (click)="changeToggle()">How many visually impaired people are in the world?
+    </button>
+    <div class="content" [style.display]="showHide()">
+      <p>Globally, at least 2.2 billion people have some sort of a vision impairment.</p>
+    </div>
+    <button class="collapsible" (click)="changeToggle1()">How many people use screen readers?</button>
+    <div class="content" [style.display]="showHide1()">
+      <p>Screen readers are today one of the most common assistive technologies used by blind and visually impaired
+        people for navigating and interacting with content. Almost 7.3 million Americans rely on this device for
+        fully accessing the web.</p>
+    </div>
+    <button class="collapsible" (click)="changeToggle2()">What is ARIA?</button>
+    <div class="content" [style.display]="showHide2()">
+      <p>ARIA is an anacronym for “Accessible Rich Internet Applications”. An initiative started in 2006, ARIA is a set
+        of attributes we can add to HTML that allows us to make web content more accessible to users with disabilities
+        who use Assistive Technologies. ARIA allows screen readers to more explicitly describe the intentions of the
+        web page to the user. ARIA attributes allow us to describe the state, properties, and functions of each element
+        on the page. This allows users with visual impairments to better understand the page structure, which elements
+        are interactive controls, how the keyboard will interact with the page, dynamic elements like modals and
+        dropdowns, and much more.</p>
+    </div>
+  </div>
+
+<!--  by adding the aria hidden tag we hide this text from the user and instead skip straight into the text box -->
+<!--  and prompt the user more directly with better direction-->
+  <h2 id = "name-header" aria-hidden="true">Whats your name?</h2>
+  <input
+    type="text"
+    id="nameInput"
+    name="name"
+
+    autocomplete="off"
+    (change)="updateName()"
+    aria-label="Type your name here and then press enter" />
+
+
+<!--  By using invisible aria labels i can confirm with the user that their name has been entered and thank them with-->
+<!--  a personalized message using their name that I dynamically called-->
+  <p id = "log" [attr.aria-label]="'Your response has been entered. Thank you' + log "> </p>
+  <p>Thank you for taking the ARIA Demo</p>
+
+
+<!--  We use arias hidden tag here again so the screen reader will skip over it-->
+  <h1 aria-hidden="true">If you can read this then consider yourself lucky because not everyone can. Lets make the web an accessible place
+  for everyone!!</h1>
+</main>
+</body>
+</html>
+
